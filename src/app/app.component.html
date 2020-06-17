@@ -12,12 +12,29 @@
             <input formControlName="firstName" type="text"
                    [ngClass]="{ 'is-invalid' : submitted && form.firstName.errors }"
                    class="form-control">
+
+            <div class="text-warning" *ngIf="submitted && form.firstName.errors">
+              <div *ngIf="form.firstName.errors.required">
+                First Name is required.
+              </div>
+              <div *ngIf="form.firstName.errors.minlength">
+                First Name is must be 3 character long.
+              </div>
+            </div>
+
         </div>
         <div class="form-group col-6">
           <label>Last Name</label>
           <input formControlName="lastName"
                  [ngClass]="{ 'is-invalid' : submitted && form.lastName.errors }"
                  type="text" class="form-control">
+
+          <div class="text-warning" *ngIf="submitted && form.lastName.errors">
+            <div *ngIf="form.lastName.errors.required">
+              Last Name is required.
+            </div>
+          </div>
+
         </div>
 
         <div class="form-group col-12">
@@ -25,6 +42,18 @@
           <input formControlName="email"
                  [ngClass]="{ 'is-invalid' : submitted && form.email.errors }"
                  type="text" class="form-control">
+
+          <div class="text-warning" *ngIf="submitted && form.email.errors">
+            <div *ngIf="form.email.errors.required">
+              Email is required.
+            </div>
+
+            <div *ngIf="form.email.errors.email">
+              Email must be a valid email address.
+            </div>
+          </div>
+
+
         </div>
 
         <div class="form-group col-6">
@@ -32,6 +61,17 @@
           <input formControlName="password"
                  [ngClass]="{ 'is-invalid' : submitted && form.password.errors }"
                  type="text" class="form-control">
+
+          <div class="text-warning" *ngIf="submitted && form.password.errors">
+            <div *ngIf="form.password.errors.required">
+              Password is required.
+            </div>
+
+            <div *ngIf="form.password.errors.minlength">
+              Password must be 6 character long .
+            </div>
+          </div>
+
         </div>
 
         <div class="form-group col-6">
@@ -39,12 +79,28 @@
           <input formControlName="confirmPassword"
                  [ngClass]="{ 'is-invalid' : submitted && form.confirmPassword.errors }"
                  type="text" class="form-control">
+
+          <div class="text-warning" *ngIf="submitted && form.confirmPassword.errors">
+            <div *ngIf="form.confirmPassword.errors.required">
+              Confirm Password is required.
+            </div>
+
+            <div *ngIf="form.confirmPassword.errors.mustmatch">
+              Password not matched .
+            </div>
+
+
+
+          </div>
+
         </div>
 
 
         <div class="text-center">
           <button class="btn btn-success mr-3">Register</button>
-          <button class="btn btn-warning">Reset</button>
+          <button class="btn btn-warning" (click)="onReset()" >Reset</button>
+
+          <p class="text-white"> {{ this.registerForm.value | json }} </p>
         </div>
 
 
